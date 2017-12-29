@@ -1,66 +1,171 @@
-# Project Title
+# Spotify Wrapper
 
-One Paragraph of project description goes here
+A wrapper to work with the [Spotify Web Api] (https://developer.spotify.com/web-api/)
 
-## Getting Started
+##Dependencies
+  this library depends on [fetch](https://fetch.spec.whatwg.org/)
+  to make requests to the Spotify Web API. for enviroments that dont
+  support fetch, you'll need to provide a [polifyl] (https://github.com/fetch) to browser or [polifyl](https://github.com/bitinn/node-fetch) to Node.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Installation
+  ```sh
+    $ npm install spotify-wrapper --save
+  ```
 
-### Prerequisites
+## How to use
+  ```js
+    //import a specific method
+    import { method } from 'spotify-wrapper';
 
-What things you need to install the software and how to install them
+    //import all method
+    import * as spotifyWrapper from 'spotify-wrapper';
+  ```
+## CommonJS
+  ```js
+    var spotify = require('spotify-wrapper');
+  ```
 
-```
-Give examples
-```
+## UMD in Browser
 
-### Installing
+  ```html
+    <!-- to import non-minified version -->
+    <script src="spotify-wrapper.umd.js"></script>
+    <!-- to import minified version -->
+    <script src="spotify-wrapper.umd.min.js"> </script>
+  ```
 
-A step by step series of examples that tell you have to get a development env running
+  After that the library will be available to the Global as
+  `spotifyWrapper`.
+  follow a exemple:
+  ```js
+    const albums = spotifyWrapper.searchAlbums('Chosen artist');
+  ```
 
-Say what the step will be
+## Methods
+  follow the methods that the library provides;
+### search(query, types)
+  search for information about artist, albums, tracks of playlist.
+  [Test in Spotify Web Console] (https://developer.spotify.com/web-api/console/get-search-item/).
 
-```
-Give the example
-```
+  **Arguments**
 
-And repeat
+  Argument | type               |     options
+  `query`  | *string*           | 'Any search query'
+  `type`   | *Array of strings* | ['artist', 'album', 'track', 'playlist']
 
-```
-until finished
-```
+  ***Example**
+    ```js
+    search('Muse', ['artist, 'album'])
+      .then(data => {
+          //do what you want with the data
+      })
+    ```
+## searcAlbums(query)
+  search for informations about Albums with provide query. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-several-albums/) with type defined as *album*
 
-End with an example of getting some data out of the system or using it for a little demo
+  **Arguments**
 
-## Running the tests
+  Argument | type               |     options
+  `query`  | *string*           | 'Any search query'
 
-Explain how to run the automated tests for this system
+  **Example**
+    ```js
+      searchAlbums('Muse')
+        .then(data => data {
+          //do what you want with the data
+        })
+    ```
+## searchArtists(query)
+   search for informations about Artists with provide query. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-search-item/) with type defined as *artist*
 
-### Break down into end to end tests
+   **Arguments**
+   Argument | type               |     options
+   `query`  | *string*           | 'Any search query'
 
-Explain what these tests test and why
+  **Example**
+     ```js
+      searchAlbums('Muse')
+        .then(data => data {
+          //do what you want with the data
+        })
+    ```
+## searchTrakcs(query)
+  search for informations about Tracks with provide query. Test in [Spotify Web Console] (https://developer.spotify.com/web-api/console/get-search-item/) with type defined as *track*
 
-```
-Give an example
-```
+   **Arguments**
+   Argument | type               |     options
+   `query`  | *string*           | 'Any search query'
 
-### And coding style tests
+  **Example**
+     ```js
+      searchAlbums('Pretender')
+        .then(data => data {
+          //do what you want with the data
+        })
+    ```
 
-Explain what these tests test and why
+## searchPlayLists(query)
+  search information about Playlist with provide query. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-search-item/) whit type defined as *playlist*
 
-```
-Give an example
-```
+   **Arguments**
+   Argument | type               |     options
+   `query`  | *string*           | 'Any search query'
 
-## Deployment
+  **Example**
+     ```js
+      searchAlbums('Run berg')
+        .then(data => data {
+          //do what you want with the data
+        })
+    ```
 
-Add additional notes about how to deploy this on a live system
+## getAlbum(id)
+  Search for informations about a specific Album with provided id
+  Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-album/)
 
-## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+  **Example**
+     ```js
+      getAlbum('4aawyAB9vmqN3uQ7FjRGTy')
+        .then(data => data {
+          //do what you want with the data
+        })
+    ```
+
+
+## getAlbums(id)
+  Search for informations about some Albums whit all id's Test in
+  [Spotify Web Console] (https://developer.spotify.com/web-api/console/get-artist-albums/)
+
+  **Arguments**
+
+  Argument | type                    |     options
+  `ids`    | *Array of string*       |    ['id', 'id2']
+
+  **Example**
+    ```js
+      getAlbums(['4aawyAB9vmqN3uQ7FjRGTy', '893reAB9vmqN3uQ7FjRGTy'])
+        .then(data => data {
+          //do what you want with the data
+        })
+    ```
+
+## getAlbumTracks(id)
+  Get Albums Tracks with  provided id. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-album-tracks/)
+
+  **Arguments**
+
+  Argument | type           |     options
+  `ids`    | *String*       |    id
+
+  **Example**
+    ```js
+      getAlbumTracks('4aawyAB9vmqN3uQ7FjRGTy')
+        .then(data => data {
+          //do what you want with the data
+        })
+    ```
 
 ## Contributing
 
@@ -68,11 +173,11 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+**Renan Melo** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
