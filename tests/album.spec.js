@@ -10,7 +10,7 @@ chai.use(sinonChai);
 sinonStubPromise(sinon);
 global.fetch =  require('node-fetch');
 
-describe.only('Album', () => {
+describe('Album', () => {
   let fetchStub;
   let promise;
   beforeEach(() => {
