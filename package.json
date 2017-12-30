@@ -1,5 +1,5 @@
 {
-  "name": "spotify-wrapper",
+  "name": "wrapper_spotify",
   "version": "1.0.0",
   "description": "Wrapper to work with Spotify Web Api",
   "main": "lib/index.js",
@@ -68,5 +68,6 @@
     "sinon-stub-promise": "^4.0.0",
     "webpack": "^3.10.0"
   },
-  "dependencies": {}
+  "dependencies": {
+   }
 }
